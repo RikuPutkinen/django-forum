@@ -1,7 +1,7 @@
 from django.db import models
 
 class Board(models.Model):
-    boad_name = models.CharField(max_length=50)
+    board_name = models.CharField(max_length=50)
 
 class Post(models.Model):
     nickname = models.CharField(max_length=20)
