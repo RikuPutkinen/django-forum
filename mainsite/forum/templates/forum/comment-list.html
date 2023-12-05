@@ -1,0 +1,64 @@
+<div id="comment-list">
+    <h2>Comments</h2>
+    <button hx-get="{% url 'forum:new-comment' post_id %}" hx-swap="outerHTML" hx-target="this" class="post-button">New Comment</button>
+    <ul>
+        {% for comment in page_obj %}
+            <li class="comment-container">
+                <p>{{ comment.nickname }}</p>
+                <p>{{ comment.post_date }}</p>
+                <br/>
+                <p>{{ comment.comment_text }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="page-select">
+        {% if page_obj.has_previous %}
+            {% if page_obj.previous_page_number != 1 %}
+                <button
+                    hx-get="{% url 'forum:comment-list' post_id %}?page=1"
+                    hx-target="#comment-list"
+                    hx-swap="innerHTML"
+                    hx-trigger="click">First</button>
+            {% endif %}
+            <button
+                    hx-get="{% url 'forum:comment-list' post_id %}?page={{ page_obj.previous_page_number }}"
+                    hx-target="#comment-list"
+                    hx-swap="innerHTML"
+                    hx-trigger="click">Previous</button>
+        {% endif %}
+        {% if page_obj.has_other_pages %}
+            <span>Page
+                <select
+                    name="page"
+                    hx-get="{% url 'forum:comment-list' post_id %}"
+                    hx-include="this"
+                    hx-target="#comment-list"
+                    hx-swap="innerHTML"
+                >
+                    {% for i in page_range %}
+                        <option value={{ i }}
+                            {% if i == page_obj.number %}
+                                selected
+                            {% endif %}    
+                        >{{ i }}</option>
+                    {% endfor %}
+                </select>
+                of {{ page_obj.paginator.num_pages }}</span>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <button
+                    hx-get="{% url 'forum:comment-list' post_id %}?page={{ page_obj.next_page_number }}"
+                    hx-target="#comment-list"
+                    hx-swap="innerHTML"
+                    hx-trigger="click">Next</button>
+            {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+                <button
+                    hx-get="{% url 'forum:comment-list' post_id %}?page={{ page_obj.paginator.num_pages }}"
+                    hx-target="#comment-list"
+                    hx-swap="innerHTML"
+                    hx-trigger="click">Last</button>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

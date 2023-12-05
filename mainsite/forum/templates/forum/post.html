@@ -1,0 +1,19 @@
+{% extends "./base.html" %}
+
+{% block title %}{{ post.post_title }} - Forum{% endblock %}
+
+{% block content %}
+
+<div class="post-container">
+    <h1>{{ post.post_title }}</h1>
+    <p>Posted by {{ post.nickname }}</p>
+    <p>{{ post.post_date }}</p>
+    <br />
+    <p>{{ post.post_text }}</p>
+</div>
+<div id="comment-list"
+    hx-get="{% url 'forum:comment-list' post.id %}"
+    hx-target="this"
+    hx-swap="innerHTML"
+    hx-trigger="load"></div>
+{% endblock %}

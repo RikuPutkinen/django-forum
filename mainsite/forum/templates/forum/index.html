@@ -1,0 +1,32 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<h1>Forum</h1>
+<h2>Categories</h2>
+<ul>
+{% for board in boards %}
+    <li class="board-link"><a href="{{ board.board_name }}/">{{ board.board_name }}</a></li>
+{% endfor %}
+</ul>
+<h2>Recent Posts</h2>
+<table class="post-table recent-posts">
+    <tr>
+        <th>Title</th>
+        <th>Board</th>
+        <th>Posted by</th>
+        <th>Posted at</th>
+    </tr>
+    {% for post in recent_posts %}
+        <tr>
+            <td>
+                <a href="{% url 'forum:posts' post.id %}">{{ post.post_title }}</a>
+            </td>
+            <td>
+                <a href="{% url 'forum:boards' post.board_id.board_name %}">{{ post.board_id.board_name }}</a>
+            </td>
+            <td>{{ post.nickname }}</td>
+            <td>{{ post.post_date }}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

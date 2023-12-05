@@ -1,0 +1,6 @@
+<form action="{% url 'forum:posts' post_id %}" method="post">
+    {% csrf_token %}
+    <h3>New Comment</h3>
+    {{ form.as_div }}
+    <input type="submit" value="Submit">
+</form>

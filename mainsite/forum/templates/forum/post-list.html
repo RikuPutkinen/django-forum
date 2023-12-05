@@ -1,0 +1,68 @@
+<div id="post-list">
+    <table class="post-table">
+        <tr>
+            <th>Title</th>
+            <th>Posted by</th>
+            <th>Posted at</th>
+        </tr>
+        {% for post in page_obj %}
+            <tr>
+                <td>
+                    <a href="{% url 'forum:posts' post.id %}">{{ post.post_title }}</a>
+                </td>
+                <td>{{ post.nickname }}</td>
+                <td>{{ post.post_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="page-select">
+        {% if page_obj.has_previous %}
+            {% if page_obj.previous_page_number != 1 %}
+                <a
+                    hx-get="{% url 'forum:post-list' board_name %}?page=1"
+                    hx-target="#post-list"
+                    hx-swap="outerHTML"
+                    hx-trigger="click">First</a>
+            {% endif %}
+            <a
+                    hx-get="{% url 'forum:post-list' board_name %}?page={{ page_obj.previous_page_number }}"
+                    hx-target="#post-list"
+                    hx-swap="outerHTML"
+                    hx-trigger="click">Previous</a>
+        {% endif %}
+        {% if page_obj.has_other_pages %}
+            <span>Page
+                <select
+                    name="page"
+                    hx-get="{% url 'forum:post-list' board_name %}"
+                    hx-include="this"
+                    hx-target="#post-list"
+                    hx-swap="outerHTML"
+                >
+                    {% for i in page_range %}
+                        <option value={{ i }}
+                            {% if i == page_obj.number %}
+                                selected
+                            {% endif %}    
+                        >{{ i }}</option>
+                    {% endfor %}
+                </select>
+                of {{ page_obj.paginator.num_pages }}</span>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a
+                    hx-get="{% url 'forum:post-list' board_name %}?page={{ page_obj.next_page_number }}"
+                    hx-target="#post-list"
+                    hx-swap="outerHTML"
+                    hx-trigger="click">Next</a>
+            {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+                <a
+                    hx-get="{% url 'forum:post-list' board_name %}?page={{ page_obj.paginator.num_pages }}"
+                    hx-target="#post-list"
+                    hx-swap="outerHTML"
+                    hx-trigger="click">Last</a>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>

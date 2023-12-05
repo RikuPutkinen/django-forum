@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'forum/style.css' %}">
+    <title>{% block title %}Forum{% endblock %}</title>
+  </head>
+  
+  <body>
+    <nav>
+      <a href="{% url 'forum:index' %}" id="home-link">Forum</a>
+    </nav>
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+    <footer>
+      <p><a href="https://github.com/RikuPutkinen/django-forum">Source code on GitHub</a></p>
+      <p>Riku Putkinen 2023</p>
+    </footer>
+    <script src="https://unpkg.com/htmx.org@1.9.8"></script>
+  </body>
+</html>

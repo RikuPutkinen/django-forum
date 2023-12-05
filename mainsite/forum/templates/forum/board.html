@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+
+{% block title %}{{ board.board_name }} - Forum{% endblock %}
+
+{% block content %}
+<h1>{{ board.board_name }}</h1>
+<h2>Posts</h2>
+<button hx-get="{% url 'forum:new-post' board.board_name %}" hx-swap="outerHTML" class="post-button">New Post</button>
+<div id="post-list"
+    hx-get="{% url 'forum:post-list' board.board_name %}"
+    hx-target="this"
+    hx-swap="outerHTML"
+    hx-trigger="load"></div>
+
+{% endblock %}
