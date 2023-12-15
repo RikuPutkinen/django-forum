@@ -78,12 +78,6 @@ def new_comment(request, post_id):
 def comment_list(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comment_set.all()
-    page_arg = request.GET.get("page")
-
-    paginator = Paginator(comments, 2)
-    page_num = paginator.num_pages if page_arg == 'last' else page_arg
-    page_obj = paginator.get_page(page_num)
-    page_range = range(1, paginator.num_pages + 1)
     
-    context = {"page_obj": page_obj, "page_range": page_range, "post_id": post_id}
+    context = {"post_id": post_id, "comment_list": comments}
     return render(request, "forum/comment-list.html", context)
