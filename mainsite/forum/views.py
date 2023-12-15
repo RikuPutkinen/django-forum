@@ -78,6 +78,7 @@ def new_comment(request, post_id):
 def comment_list(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comment_set.all()
+    number_of_comments = len(comments)
     
-    context = {"post_id": post_id, "comment_list": comments}
+    context = {"post_id": post_id, "comment_list": comments, "number_of_comments": number_of_comments}
     return render(request, "forum/comment-list.html", context)

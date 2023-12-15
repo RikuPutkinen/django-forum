@@ -1,5 +1,12 @@
 <div id="comment-list">
-    <h2>Comments</h2>
+    {% if number_of_comments == 0 %}
+        <h2>No comments</h2>
+    {% elif number_of_comments == 1 %}
+        <h2>1 comment</h2>
+    {% else %}
+        <h2>{{ number_of_comments }} comments</h2>
+    {% endif %}
+    
     <button hx-get="{% url 'forum:new-comment' post_id %}" hx-swap="outerHTML" hx-target="this" class="post-button">New Comment</button>
     <ul>
         {% for comment in comment_list %}
