@@ -9,7 +9,9 @@
     <p>Posted by {{ post.nickname }}</p>
     <p>{{ post.post_date }}</p>
     <br />
-    <p>{{ post.post_text }}</p>
+    <div class="post-text-container">
+        {{ post.post_text | linebreaks }}
+    </div>
 </div>
 <div id="comment-list"
     hx-get="{% url 'forum:comment-list' post.id %}"

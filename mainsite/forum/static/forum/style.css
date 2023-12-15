@@ -164,3 +164,11 @@ form > input[type="submit"] {
   border: 2px solid var(--foreground-color2);
   padding: .5rem;
 }
+
+.post-text-container {
+  line-height: 1.5;
+
+  > p:nth-last-child(n +2) {
+    margin-bottom: .5rem;
+  }
+}
