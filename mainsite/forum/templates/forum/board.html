@@ -3,6 +3,11 @@
 {% block title %}{{ board.board_name }} - Forum{% endblock %}
 
 {% block content %}
+<p class="link-row">
+    <a href="{% url 'forum:index' %}">Forum</a>
+    &raquo;
+    {{ board.board_name }}
+</p>
 <h1>{{ board.board_name }}</h1>
 <h2>Posts</h2>
 <button hx-get="{% url 'forum:new-post' board.board_name %}" hx-swap="outerHTML" class="post-button">New Post</button>

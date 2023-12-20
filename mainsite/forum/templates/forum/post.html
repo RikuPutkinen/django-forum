@@ -5,6 +5,13 @@
 {% block content %}
 
 <div class="post-container">
+    <p class="link-row">
+        <a href="{% url 'forum:index' %}">Forum</a>
+        &raquo;
+        <a href="{% url 'forum:boards' post.board_id.board_name %}">{{ post.board_id.board_name }}</a>
+        &raquo;
+        {{ post.post_title }}
+    </p>
     <h1>{{ post.post_title }}</h1>
     <p>Posted by {{ post.nickname }}</p>
     <p>{{ post.post_date }}</p>
