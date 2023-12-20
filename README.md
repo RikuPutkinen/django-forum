@@ -2,7 +2,7 @@
 
 A simple forum site built with Django and a little bit of HTMX.
 
-# Screenshots
+## Screenshots
 
 ![A screenshot of the home page](https://github.com/RikuPutkinen/django-forum/blob/main/screenshots/index.png?raw=true)
 
@@ -10,7 +10,7 @@ A simple forum site built with Django and a little bit of HTMX.
 
 ![A screenshot of the post page](https://github.com/RikuPutkinen/django-forum/blob/main/screenshots/post.png?raw=true)
 
-# Installation
+## Installation
 
 ```
 git clone git@github.com:RikuPutkinen/django-forum.git
