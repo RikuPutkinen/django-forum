@@ -60,7 +60,7 @@ def post_list(request, board_name):
     board = Board.objects.filter(board_name=board_name)[0]
     posts = board.post_set.all()
 
-    paginator = Paginator(posts, 2)
+    paginator = Paginator(posts, 10)
     page_num = request.GET.get("page")
     page_obj = paginator.get_page(page_num)
     page_range = range(1, paginator.num_pages + 1)
